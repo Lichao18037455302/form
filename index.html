@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>表单验证</title>
+		<!--<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				margin-top: 100px;
+				text-align: center;
+			}
+			.box input{
+				height: 18px;
+			}
+			.box span{
+				background: gray;
+				border: 1px solid gray;
+				width: 230px;
+				display: inline-block;
+				height: 20px;
+				text-align: left;
+				padding-left: 20px;
+				vertical-align: bottom;
+			}
+			.box span.right{
+				background: #dfffdf url(img/right.png) no-repeat center left;
+				color: #008000;
+				border:  1px solid #aaffdf;
+			}
+			.box span.wrong{
+				background: #ffdcd0 url(img/wrong.png) no-repeat center left;
+				color: #ff0000;
+				border: 1px solid #dddcd0;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				//模拟jQuery函数
+				function $(id){
+					return document.getElementById(id);
+				}
+				//input的失去焦点事件
+				$("grade").onblur=function(){
+					var txt=$("grade").value;
+					if(txt==""){
+						$("tips").innerHTML="小老弟，内容不能为空";
+						$("tips").className="wrong";
+					}else if(isNaN(txt)){
+						$("tips").innerHTML="小老弟，请输入数字";
+						$("tips").className="wrong";
+					}else if(txt>150 || txt<0){
+						$("tips").innerHTML="小老弟，成绩范围0-150";
+						$("tips").className="wrong";
+					}else{
+						$("tips").innerHTML="小老弟，输入合理";
+						$("tips").className="right";
+					} 
+				}
+			}
+		</script>-->
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.box {
+				margin-top: 100px;
+				text-align: center;
+			}
+			
+			.box label {
+				font-family: "微软雅黑";
+				font-size: 20px;
+			}
+			
+			.box input {
+				height: 30px;
+				border: 1px solid gray;
+				border-radius: 3px;
+			}
+			
+			.box span {
+				font-family: "微软雅黑";
+				font-size: 13px;
+				display: none;
+				text-align: center;
+			}
+			
+			.box #tip1.wrong1 {
+				padding-left: 20px;
+				background: url(img/wrong.png) no-repeat;
+				color: red;
+				display: inline-block;
+			}
+			
+			.box #tip1.right1 {
+				padding-left: 20px;
+				color: green;
+				background: url(img/right.png) no-repeat;
+				display: inline-block;
+			}
+			
+			.box #tip2.wrong2 {
+				padding-left: 20px;
+				background: url(img/wrong.png) no-repeat;
+				color: red;
+				display: inline-block;
+			}
+			
+			.box #tip2.right2 {
+				padding-left: 20px;
+				color: green;
+				background: url(img/right.png) no-repeat;
+				display: inline-block;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				function $(id) {
+					return document.getElementById(id);
+				}
+				$("grade1").onblur = function() {
+					var txt = $("grade1").value;
+					var regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
+						regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+					var re = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+					var reg = /^[0-9]*$/;
+					var regNum = /^[a-zA-Z]+$/;
+					if(txt == "") {
+						$("tip1").innerHTML = "内容不能为空";
+						$("tip1").className = "wrong1";
+					} else if(txt.length < 6) {
+						$("tip1").innerHTML = "用户名不能少于6位";
+						$("tip1").className = "wrong1";
+					} else if(regEn.test(txt) || regCn.test(txt)) {
+						$("tip1").innerHTML = "用户名不能包含特殊字符";
+						$("tip1").className = "wrong1";
+					} else if(re.test(txt)) {
+						$("tip1").innerHTML = "用户名不能包含汉字";
+						$("tip1").className = "wrong1";
+					} else if(reg.test(txt)) {
+						$("tip1").innerHTML = "用户名不能为纯数字";
+						$("tip1").className = "wrong1";
+					} else if(regNum.test(txt)) {
+						$("tip1").innerHTML = "用户名必须为字母和数字";
+						$("tip1").className = "wrong1";
+					} else {
+						$("tip1").innerHTML = "验证通过";
+						$("tip1").className = "right1";
+					}
+				}
+				$("grade2").onblur = function() {
+					var txt = $("grade2").value;
+					var regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
+						regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+					var re = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+					var reg = /^[0-9]*$/;
+					var regNum = /^[a-zA-Z]+$/;
+					if(txt == "") {
+						$("tip2").innerHTML = "内容不能为空";
+						$("tip2").className = "wrong2";
+					} else if(txt.length < 6) {
+						$("tip2").innerHTML = "密码不能少于6位";
+						$("tip2").className = "wrong2";
+					} else if(regEn.test(txt) || regCn.test(txt)) {
+						$("tip2").innerHTML = "密码不能包含特殊字符";
+						$("tip2").className = "wrong2";
+					} else if(re.test(txt)) {
+						$("tip2").innerHTML = "密码不能包含汉字";
+						$("tip2").className = "wrong2";
+					} else if(reg.test(txt)) {
+						$("tip2").innerHTML = "密码不能为纯数字";
+						$("tip2").className = "wrong2";
+					} else if(regNum.test(txt)) {
+						$("tip2").innerHTML = "密码必须为字母和数字";
+						$("tip2").className = "wrong2";
+					} else {
+						$("tip2").innerHTML = "验证通过";
+						$("tip2").className = "right2";
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<!--<div class="box">
+		<label for="grade">高数</label>
+		<input id="grade"/>
+		<span id="tips">请输入数字</span>
+		</div>-->
+		<div class="box">
+			<label for="grade">用户名：</label>
+			<input id="grade1" placeholder="请输入用户名" /><br />
+			<span id="tip1">验证通过</span><br />
+			<label for="grade">密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+			<input id="grade2" placeholder="请输入密码" /><br />
+			<span id="tip2">验证通过</span>
+		</div>
+	</body>
+
+</html>
